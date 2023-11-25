@@ -36,22 +36,22 @@ def get_vectorstore(text_chunks):
     return vectorstore
 
 
-def get_conversation_chain(vectorstore):
-    llm = ChatOpenAI()
-    memory = ConversationBufferMemory(memory_key = 'chat_history', return_messages= True)
-    conversation_chain = ConversationalRetrievalChain.from_llm(
-        llm = llm,
-        retriever=vectorstore.as_retriever(),
-        memory=memory
-    )
-    return conversation_chain
+# def get_conversation_chain(vectorstore):
+#     llm = ChatOpenAI()
+#     memory = ConversationBufferMemory(memory_key = 'chat_history', return_messages= True)
+#     conversation_chain = ConversationalRetrievalChain.from_llm(
+#         llm = llm,
+#         retriever=vectorstore.as_retriever(),
+#         memory=memory
+#     )
+#     return conversation_chain
 
 
 def main():
     load_dotenv()
     st.set_page_config(page_title = "Chat with multiple PDFs", page_icon = ":books:")
 
-    st.write(css, unsave_allow_html = True)
+    # st.write(css, unsave_allow_html = True)
 
     if "conversation" not in st.session_state:
         st.session_state.conversation = None
@@ -59,8 +59,8 @@ def main():
     st.header("Chat with multiple PDFs :books")
     st.text_input("Ask a question about your documents:")
 
-    st.write(user_template.replace("{{MSG}}", "Hello robot"), unsafe_allow_html = True)
-    st.write(bot_template.replace("{{MSG}}", "hello human"), unsafe_allow_html = True)
+    # st.write(user_template.replace("{{MSG}}", "Hello robot"), unsafe_allow_html = True)
+    # st.write(bot_template.replace("{{MSG}}", "hello human"), unsafe_allow_html = True)
 
     with st.sidebar:
         st.subheader("Your documents")
@@ -80,7 +80,7 @@ def main():
                 vectorstore = get_vectorstore(text_chunks)
 
             # create conversation chain
-                st.session_state.conversation = get_conversation_chain(vectorstore)
+                #st.session_state.conversation = get_conversation_chain(vectorstore)
     #st.session_state.conversation
 
 
